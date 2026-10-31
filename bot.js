@@ -2,10 +2,10 @@ const mineflayer = require('mineflayer');
 
 function createBot() {
     const bot = mineflayer.createBot({
-        host: 'MININOCRAFT98-ExQF.aternos.me', // <--- REEMPLAZA ESTO POR LA IP DE TU SERVER
-        port: 20569,                // Puerto predeterminado de Minecraft
-        username: 'Raboot_356',    // Nombre genérico del bot/NPC dentro del juego
-        version: '1.21.4'              // Autodetecta la versión exacta del servidor (1.8 a 1.21+)
+        host: 'MININOCRAFT98-ExQF.aternos.me',
+        port: 20569,
+        username: 'Raboot_356',
+        version: '1.21.4'
     });
 
     bot.on('spawn', () => {
@@ -16,6 +16,15 @@ function createBot() {
 
     bot.on('login', () => {
         console.log(`[NPC] Conexión establecida con el servidor de Minecraft.`);
+    });
+
+    // Ignorar errores no críticos de formato de chat para evitar que el bot muera
+    bot.on('error', (err) => {
+        if (err.message && err.message.includes('unknown chat format code')) {
+            console.log('[NPC] Aviso: Se ignoró un formato de chat desconocido del servidor.');
+            return;
+        }
+        console.log(`[NPC] Error crítico de red detectado: ${err.message || err}`);
     });
 
     // Rutina automatizada del NPC: Buscar cofre, interactuar, cerrar y saltar (Cada 45 segundos)
@@ -32,11 +41,11 @@ function createBot() {
             if (chestBlock) {
                 console.log('[NPC] Interactuando con el contenedor cercano...');
                 
-                // 2. Abrir el contenedor (genera la animación y sonido físico en el servidor)
+                // 2. Abrir el contenedor
                 const chest = await bot.openChest(chestBlock);
                 console.log('[NPC] Contenedor abierto.');
                 
-                // Mantener la interfaz abierta durante 2 segundos simulando actividad de inventario
+                // Mantener la interfaz abierta durante 2 segundos
                 await new Promise(resolve => setTimeout(resolve, 2000));
                 
                 // 3. Cerrar la interfaz del contenedor
@@ -62,8 +71,6 @@ function createBot() {
         console.log(`[NPC] Conexión finalizada por: ${reason}. Reintentando en 25 segundos...`);
         setTimeout(createBot, 25000);
     });
-
-    bot.on('error', (err) => console.log(`[NPC] Error crítico de red detectado: ${err}`));
 }
 
 createBot();
