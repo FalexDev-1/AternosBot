@@ -2,8 +2,8 @@ const mineflayer = require('mineflayer');
 
 function createBot() {
     const bot = mineflayer.createBot({
-        host: 'MININOCRAFT98.aternos.me', // <--- REEMPLAZA ESTO POR LA IP DE TU SERVER
-        port: 60144,                // Puerto predeterminado de Minecraft
+        host: 'MININOCRAFT98-ExQF.aternos.me', // <--- REEMPLAZA ESTO POR LA IP DE TU SERVER
+        port: 20569,                // Puerto predeterminado de Minecraft
         username: 'Raboot_356',    // Nombre genérico del bot/NPC dentro del juego
         version: false              // Autodetecta la versión exacta del servidor (1.8 a 1.21+)
     });
