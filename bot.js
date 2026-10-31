@@ -18,7 +18,6 @@ function createBot() {
         console.log(`[NPC] Conexión establecida con el servidor de Minecraft.`);
     });
 
-    // Ignorar errores no críticos de formato de chat para evitar que el bot muera
     bot.on('error', (err) => {
         if (err.message && err.message.includes('unknown chat format code')) {
             console.log('[NPC] Aviso: Se ignoró un formato de chat desconocido del servidor.');
@@ -26,6 +25,7 @@ function createBot() {
         }
         console.log(`[NPC] Error crítico de red detectado: ${err.message || err}`);
     });
+    // ==========================================
 
     // Rutina automatizada del NPC: Buscar cofre, interactuar, cerrar y saltar (Cada 45 segundos)
     setInterval(async () => {
