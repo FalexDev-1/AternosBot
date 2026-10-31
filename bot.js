@@ -5,7 +5,7 @@ function createBot() {
         host: 'MININOCRAFT98-ExQF.aternos.me', // <--- REEMPLAZA ESTO POR LA IP DE TU SERVER
         port: 20569,                // Puerto predeterminado de Minecraft
         username: 'Raboot_356',    // Nombre genérico del bot/NPC dentro del juego
-        version: 1.21.4              // Autodetecta la versión exacta del servidor (1.8 a 1.21+)
+        version: '1.21.4'              // Autodetecta la versión exacta del servidor (1.8 a 1.21+)
     });
 
     bot.on('spawn', () => {
